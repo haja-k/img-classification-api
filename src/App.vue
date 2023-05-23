@@ -1,23 +1,22 @@
 <template>
   <v-app>
-    <v-main>
-      <HelloWorld/>
-    </v-main>
+    <RocketNavigation />
+    <RocketPlans />
+    <RocketFooter />
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import RocketNavigation from '@/components/navigation';
+import RocketPlans from '@/components/plans';
+import RocketFooter from '@/components/footer';
 
 export default {
-  name: 'App',
-
+  name: 'LogRocketApp',
   components: {
-    HelloWorld,
-  },
-
-  data: () => ({
-    //
-  }),
-}
+    RocketNavigation,
+    RocketPlans,
+    RocketFooter
+  }
+};
 </script>
