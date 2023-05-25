@@ -10,7 +10,7 @@
   
   <script>
   export default {
-    name: 'RocketFooter'
+    name: 'ICPFooter'
   };
   </script>
   

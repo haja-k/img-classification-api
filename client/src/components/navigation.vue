@@ -30,10 +30,10 @@
   
 <script>
 export default {
-  name: 'RocketNavigation',
+  name: 'ICPNavigation',
   data() {
     return {
-      drawer: true,
+      drawer: false,
       menus: [
         { value: 'Data Input' },
         { value: 'Data Preparation' },
