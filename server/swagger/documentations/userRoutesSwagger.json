@@ -1,0 +1,610 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "REST API",
+    "description": ""
+  },
+  "host": "127.0.0.1",
+  "basePath": "/user",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/change-password": {
+      "put": {
+        "tags": [
+          "user"
+        ],
+        "description": "Change Account Password",
+        "parameters": [
+          {
+            "name": "password",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "dwightschrute@sains.com.my"
+                },
+                "oldPassword": {
+                  "type": "string",
+                  "example": ""
+                },
+                "newPassword": {
+                  "type": "string",
+                  "example": "dwightschrute"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/profile": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "description": "User Profile",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/list-auth-projects": {
+      "get": {
+        "tags": [
+          "user + admin: project related"
+        ],
+        "description": "List All Authorized Registered Projects",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/project-details": {
+      "post": {
+        "tags": [
+          "public: project related"
+        ],
+        "description": "List All Authorized Project Details: For users with ",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "formData",
+            "required": true,
+            "type": "integer",
+            "description": "ID of the project"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/create-project-version": {
+      "post": {
+        "tags": [
+          "user + admin: project related"
+        ],
+        "description": "Create New Project Version",
+        "parameters": [
+          {
+            "name": "versionName",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "Name of the version"
+          },
+          {
+            "name": "versionDescription",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "Description of the version"
+          },
+          {
+            "name": "projectID",
+            "in": "formData",
+            "required": true,
+            "type": "integer",
+            "description": "Project ID related to the version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/edit-project-version": {
+      "put": {
+        "tags": [
+          "user + admin: project related"
+        ],
+        "description": "Edit Project BASIC Details: This includes deactivate/reactivate a project & remove members.",
+        "parameters": [
+          {
+            "name": "projectVersionID",
+            "in": "formData",
+            "required": true,
+            "type": "integer",
+            "description": "ID of the version"
+          },
+          {
+            "name": "projectID",
+            "in": "formData",
+            "required": true,
+            "type": "integer",
+            "description": "Project ID of the version"
+          },
+          {
+            "name": "versionName",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "Name of the version"
+          },
+          {
+            "name": "versionDescription",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "Description of the version"
+          },
+          {
+            "name": "isActive",
+            "in": "formData",
+            "required": true,
+            "type": "boolean",
+            "description": "Validity status of the version"
+          },
+          {
+            "name": "preprocess_progress",
+            "in": "formData",
+            "required": true,
+            "type": "integer",
+            "collectionFormat": "multi",
+            "description": "Status of the project"
+          },
+          {
+            "name": "training_progress",
+            "in": "formData",
+            "required": true,
+            "type": "integer",
+            "collectionFormat": "multi",
+            "description": "Status of the project"
+          },
+          {
+            "name": "color_mode",
+            "in": "formData",
+            "required": true,
+            "type": "integer",
+            "collectionFormat": "multi",
+            "description": "Status of the project"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/pv-options": {
+      "post": {
+        "tags": [
+          "dropdown options"
+        ],
+        "description": "Porject Version Options",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/color-options": {
+      "get": {
+        "tags": [
+          "dropdown options"
+        ],
+        "description": "Color Options",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/normalization-options": {
+      "get": {
+        "tags": [
+          "dropdown options"
+        ],
+        "description": "Normalization Options",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/sampling-options": {
+      "get": {
+        "tags": [
+          "dropdown options"
+        ],
+        "description": "Sampling Options",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/augmentation-options": {
+      "get": {
+        "tags": [
+          "dropdown options"
+        ],
+        "description": "Sampling Options",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/model-options": {
+      "get": {
+        "tags": [
+          "dropdown options"
+        ],
+        "description": "Normalization Options",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/optimizer-options": {
+      "get": {
+        "tags": [
+          "dropdown options"
+        ],
+        "description": "Sampling Options",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/loss-options": {
+      "get": {
+        "tags": [
+          "dropdown options"
+        ],
+        "description": "Sampling Options",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/upload": {
+      "post": {
+        "tags": [
+          "public: project related"
+        ],
+        "description": "upload images for the project",
+        "parameters": [
+          {
+            "name": "files",
+            "in": "formData",
+            "required": true,
+            "type": "file",
+            "description": "The folder to upload"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/download": {
+      "get": {
+        "tags": [
+          "public: project related"
+        ],
+        "description": "download images for the project",
+        "parameters": [
+          {
+            "name": "projectVersion",
+            "in": "formData",
+            "required": true,
+            "type": "integer",
+            "description": "ID of the project version"
+          },
+          {
+            "name": "projectID",
+            "in": "formData",
+            "required": true,
+            "type": "integer",
+            "description": "ID of the project"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/stream-images": {
+      "post": {
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/preprocessing": {
+      "post": {
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/ppd-progress": {
+      "post": {
+        "tags": [
+          "user + admin: project related"
+        ],
+        "description": "Project Version Preprocess Progress",
+        "parameters": [
+          {
+            "name": "projectVersionID",
+            "in": "formData",
+            "required": true,
+            "type": "integer",
+            "description": "Project Version ID related to the version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/training-progress": {
+      "post": {
+        "tags": [
+          "user + admin: project related"
+        ],
+        "description": "Project Version Training Progress",
+        "parameters": [
+          {
+            "name": "projectVersionID",
+            "in": "formData",
+            "required": true,
+            "type": "integer",
+            "description": "Project Version ID related to the version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/project-session-data": {
+      "get": {
+        "tags": [
+          "user + admin: project related"
+        ],
+        "description": "Project Session Data",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/project-session-clear": {
+      "post": {
+        "tags": [
+          "user + admin: project related"
+        ],
+        "description": "Project Session Clear",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/training-submit": {
+      "post": {
+        "tags": [
+          "user + admin: project related"
+        ],
+        "description": "Training Parameter Submission",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/export": {
+      "post": {
+        "tags": [
+          "user + admin: project related"
+        ],
+        "description": "Export Dockerfile",
+        "parameters": [
+          {
+            "name": "projectID",
+            "in": "formData",
+            "required": true,
+            "type": "integer",
+            "description": "Project ID related to the version"
+          },
+          {
+            "name": "projectVersionID",
+            "in": "formData",
+            "required": true,
+            "type": "integer",
+            "description": "Project Version ID related to the version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/get-assets": {
+      "post": {
+        "tags": [
+          "user + admin: project related"
+        ],
+        "description": "Project Version Model Assets",
+        "parameters": [
+          {
+            "name": "projectID",
+            "in": "formData",
+            "required": true,
+            "type": "integer",
+            "description": "Project ID related to the version"
+          },
+          {
+            "name": "projectVersionID",
+            "in": "formData",
+            "required": true,
+            "type": "integer",
+            "description": "Project Version ID related to the version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  }
+}

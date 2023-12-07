@@ -1,0 +1,380 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "REST API",
+    "description": ""
+  },
+  "host": "127.0.0.1",
+  "basePath": "/restricted",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/all-users": {
+      "get": {
+        "tags": [
+          "superadmin: user related"
+        ],
+        "description": "List All Registered User Accounts",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/all-admin": {
+      "get": {
+        "tags": [
+          "superadmin: user related"
+        ],
+        "description": "List All Registered Admin Accounts",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/register-user": {
+      "post": {
+        "tags": [
+          "restricted: user related"
+        ],
+        "description": "User Creation",
+        "parameters": [
+          {
+            "name": "profile",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "dwightschrute@sains.com.my"
+                },
+                "fullName": {
+                  "type": "string",
+                  "example": "Dwight K. Schrute III"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/update-role": {
+      "put": {
+        "tags": [
+          "superadmin: user related"
+        ],
+        "description": "Update User Role",
+        "parameters": [
+          {
+            "name": "profile",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "example": "8"
+                },
+                "roleAssigned": {
+                  "type": "string",
+                  "example": "superadmin"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/deactivate-account": {
+      "put": {
+        "tags": [
+          "superadmin: user related"
+        ],
+        "description": "Deactivate User Account",
+        "parameters": [
+          {
+            "name": "profile",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userID": {
+                  "type": "string",
+                  "example": "27"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/reactivate-account": {
+      "put": {
+        "tags": [
+          "superadmin: user related"
+        ],
+        "description": "Reactivate User Account",
+        "parameters": [
+          {
+            "name": "profile",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userID": {
+                  "type": "string",
+                  "example": "27"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/deactivate-group": {
+      "put": {
+        "tags": [
+          "superadmin: group related"
+        ],
+        "description": "Deactivate Group Status",
+        "parameters": [
+          {
+            "name": "group",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "groupID": {
+                  "type": "number",
+                  "example": 4
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/reactivate-group": {
+      "put": {
+        "tags": [
+          "superadmin: group related"
+        ],
+        "description": "Reactivate Group Status",
+        "parameters": [
+          {
+            "name": "group",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "groupID": {
+                  "type": "number",
+                  "example": 4
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/create-group": {
+      "post": {
+        "tags": [
+          "admin: group related"
+        ],
+        "description": "Create New Group",
+        "parameters": [
+          {
+            "name": "groupName",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "Name of the group"
+          },
+          {
+            "name": "groupDescription",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "Description of the group"
+          },
+          {
+            "name": "groupAdmin",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "ID of the group admin"
+          },
+          {
+            "name": "groupMembers",
+            "in": "formData",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "collectionFormat": "multi",
+            "description": "ID list of group members"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/edit-group": {
+      "put": {
+        "tags": [
+          "admin: group related"
+        ],
+        "description": "Edit Group Details: This includes deactivate/reactivate a group, assign new admin & remove members.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "formData",
+            "required": true,
+            "type": "integer",
+            "description": "ID of the group"
+          },
+          {
+            "name": "groupName",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "Name of the group"
+          },
+          {
+            "name": "groupDescription",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "Description of the group"
+          },
+          {
+            "name": "groupAdmin",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "ID of the group admin"
+          },
+          {
+            "name": "isActive",
+            "in": "formData",
+            "required": true,
+            "type": "boolean",
+            "description": "Status of the group"
+          },
+          {
+            "name": "groupMembers",
+            "in": "formData",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "collectionFormat": "multi",
+            "description": "ID list of group members"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/list-groups": {
+      "get": {
+        "tags": [
+          "superadmin: group related"
+        ],
+        "description": "List All Registered Groups",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  }
+}

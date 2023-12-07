@@ -1,0 +1,287 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "REST API",
+    "description": ""
+  },
+  "host": "127.0.0.1",
+  "basePath": "/admin",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/group-details": {
+      "post": {
+        "tags": [
+          "admin + superadmin: group related"
+        ],
+        "description": "List All Group Details",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "formData",
+            "required": true,
+            "type": "integer",
+            "description": "ID of the group"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/list-admin-groups": {
+      "get": {
+        "tags": [
+          "admin: group related"
+        ],
+        "description": "List Admin Group Details",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/create-project": {
+      "post": {
+        "tags": [
+          "admin: project related"
+        ],
+        "description": "Create New Project",
+        "parameters": [
+          {
+            "name": "projectName",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "Name of the project"
+          },
+          {
+            "name": "projectDescription",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "Description of the project"
+          },
+          {
+            "name": "groupID",
+            "in": "formData",
+            "required": true,
+            "type": "integer",
+            "description": "Group related to the project"
+          },
+          {
+            "name": "projectMembers",
+            "in": "formData",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "collectionFormat": "multi",
+            "description": "ID list of project members"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/list-projects": {
+      "get": {
+        "tags": [
+          "admin + superadmin: project related"
+        ],
+        "description": "List All Registered Projects",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/list-group-projects": {
+      "get": {
+        "tags": [
+          "admin + superadmin: project related"
+        ],
+        "description": "List All Registered Group Projects",
+        "parameters": [
+          {
+            "name": "groupID",
+            "in": "formData",
+            "required": true,
+            "type": "integer",
+            "description": "ID of the group"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/list-admin-projects": {
+      "get": {
+        "tags": [
+          "admin: project related"
+        ],
+        "description": "List All Registered Admin's Projects",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/edit-project": {
+      "put": {
+        "tags": [
+          "admin: project related"
+        ],
+        "description": "Edit Project BASIC Details: This includes deactivate/reactivate a project & remove members.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "formData",
+            "required": true,
+            "type": "integer",
+            "description": "ID of the project"
+          },
+          {
+            "name": "projectName",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "Name of the project"
+          },
+          {
+            "name": "projectDescription",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "Description of the project"
+          },
+          {
+            "name": "isActive",
+            "in": "formData",
+            "required": true,
+            "type": "boolean",
+            "description": "Status of the project"
+          },
+          {
+            "name": "projectMembers",
+            "in": "formData",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "collectionFormat": "multi",
+            "description": "ID list of project members"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/deactivate-project": {
+      "put": {
+        "tags": [
+          "admin: project related"
+        ],
+        "description": "Deactivate Project Status",
+        "parameters": [
+          {
+            "name": "group",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "projectID": {
+                  "type": "number",
+                  "example": 4
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/reactivate-project": {
+      "put": {
+        "tags": [
+          "admin: project related"
+        ],
+        "description": "Reactivate Project Status",
+        "parameters": [
+          {
+            "name": "group",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "projectID": {
+                  "type": "number",
+                  "example": 4
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  }
+}

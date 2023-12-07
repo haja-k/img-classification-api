@@ -1,0 +1,11 @@
+{
+    "ignore": [
+      "authRoutesSwagger.json",
+      "adminRoutesSwagger.json",
+      "userRoutesSwagger.json",
+      "restrictedRoutesSwagger.json",
+      "tmp/*",
+      "assets/*"
+    ]
+  }
+  

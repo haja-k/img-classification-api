@@ -1,0 +1,63 @@
+version: '3'
+
+networks:
+  icp-web: 
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.1.0/24
+
+services:
+  app:
+    image: icp_backend:dev_1
+    container_name: icp_backend
+    build:
+      context: ./
+    volumes:
+      - /root/icp/icp-worker/app/processed_data/:/app/tmp/models
+      - .:/app
+    working_dir: /app
+    ports:
+      - "4000:4000"
+    networks:
+      - icp-web 
+    environment:
+      NODE_ENV: dev
+      APP_URL: http://<own ip>
+      WORKER_URL: http://<own ip>:8001
+      NODE_PORT: 4000
+      DB_HOST: icp_db  
+      DB_PORT: 3306
+      DB_NAME: icp_web
+      DB_USER: root
+      DB_PASS: 12345
+      REDIS_URL: redis://@cache:6379
+      SECRET: SubL1m3tH3r31Sn0S3cr3t
+      OBS_ACCESS_ID: <own obs cred>
+      OBS_SECRET_ID: <own obs cred>
+      OBS_BUCKET: <own obs cred>
+      OBS_SERVER: <own obs cred>
+    depends_on:
+      - db
+      - redis
+
+  redis:
+    image: redis/redis-stack-server:latest
+    container_name: cache
+    restart: always
+    ports:
+      - "6379:6379"
+    networks:
+      - icp-web  
+
+  db:
+    image: mysql:5.7
+    container_name: icp_db
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345
+      MYSQL_DATABASE: icp_web
+    ports:
+      - "3307:3306"
+    networks:
+      - icp-web

@@ -1,0 +1,61 @@
+image: node:latest 
+
+cache:
+  paths:
+    - node_modules/
+    
+stages:          
+  - build
+  - test
+  - deploy
+
+# services:
+#   - redis:latest  # Add this to specify the Redis service
+#   - mysql:5.7 
+
+variables:
+  MYSQL_DATABASE: icp_web
+  MYSQL_ROOT_PASSWORD: 12345
+  DB_HOST: 127.0.0.1
+  DB_PORT: 3306
+  DB_USER: root
+  DB_PASS: 12345
+  DB_NAME: icp_web
+
+build-job:      
+  stage: build
+  environment: production
+  before_script:
+    - chmod +x ./cicd/build_bleed.sh 
+  script:
+    - ./cicd/build_bleed.sh
+
+# migrate-job:
+#   stage: test 
+#   environment: testing
+#   script:
+#     - chmod +x ./cicd/migrate_pipe.sh 
+#     - ./cicd/migrate_pipe.sh 
+
+unit-test-job:  
+  stage: test    
+  environment: testing
+  before_script:
+    - chmod +x ./cicd/test_src.sh   
+  script:
+    - ./cicd/test_src.sh
+
+lint-test-job:  
+  stage: test   
+  environment: testing
+  before_script:
+    - chmod +x ./cicd/lint_src.sh   
+  script:
+    - ./cicd/lint_src.sh
+
+deploy-job:      
+  stage: deploy  
+  environment: production
+  script:
+    - echo "Deploying application..."
+    - echo "Application successfully deployed."

@@ -1,0 +1,19 @@
+# Stage 1
+FROM node:18 as builder
+WORKDIR /app
+COPY ./package.json ./package-lock.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+
+# Stage 2
+FROM node:18-alpine as production
+WORKDIR /app
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/build ./build
+RUN apk --no-cache add curl
+RUN npm install -g nodemon
+WORKDIR /app/src/sequelize
+
+EXPOSE 4000
+CMD npm run dev

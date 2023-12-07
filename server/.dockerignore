@@ -1,0 +1,22 @@
+# env files
+.env.local
+.env.production
+.env.testing
+README.md
+CHANGELOG.md
+
+# log files
+logs/*
+
+# editor directories and files
+.vscode
+.idea
+.DS_Store
+
+# development files
+node_modules/*
+node_modules
+
+# folders
+cicd/*
+

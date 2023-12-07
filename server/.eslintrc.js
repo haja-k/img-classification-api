@@ -2,14 +2,14 @@ module.exports = {
   env: {
     browser: true,
     commonjs: true,
-    es2021: true
+    es2021: true,
+    'jest/globals': true
   },
   extends: 'standard-with-typescript',
-  overrides: [
-  ],
+  overrides: [],
   parserOptions: {
     ecmaVersion: 'latest'
   },
-  rules: {
-  }
+  plugins: ['jest'],
+  rules: {}
 }

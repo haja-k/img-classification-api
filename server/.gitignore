@@ -1,0 +1,24 @@
+# env files
+.env.local
+.env.dev
+.env.production
+.env.testing
+
+# log files
+logs/*
+/tmp
+*.png
+/assets/config.json
+
+# editor directories and files
+.vscode
+.idea
+.DS_Store
+Manual*
+
+# development files
+node_modules/*
+node_modules
+
+# folders
+
